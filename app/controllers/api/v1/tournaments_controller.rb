@@ -1,5 +1,5 @@
 class Api::V1::TournamentsController < ApplicationController
-  skip_before_action :authorized, only: [:create, :index]
+  skip_before_action :authorized, only: [:index]
 
   def index
     render json: {tournaments: Tournament.all}

@@ -1,6 +1,6 @@
 class Tournament < ApplicationRecord
   # belongs_to :user
-  belongs_to :host, class_name: "User", foreign_key: :user_id
+  belongs_to :host, class_name: "User", foreign_key: :host_id
 
   has_many :admins
   # Below is likely working but connectivity was not fully checked
