@@ -5,6 +5,11 @@ class Api::V1::TournamentsController < ApplicationController
     render json: {tournaments: Tournament.all}
   end
 
+  def index
+    tournaments = Tournament.all.map {|tourn| TournamentSerializer.new(tourn)}
+    render json: {tournaments: tournaments}
+  end
+
   def create
     @tournament = Tournament.create(tournament_params)
     if @tournament.valid?
@@ -17,6 +22,6 @@ class Api::V1::TournamentsController < ApplicationController
   private
 
   def tournament_params
-    params.require(:tournament).permit(:title, :description)
+    params.require(:tournament).permit(:title, :description, :user_id)
   end
 end
