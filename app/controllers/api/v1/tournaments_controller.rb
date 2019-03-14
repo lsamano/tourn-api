@@ -2,10 +2,6 @@ class Api::V1::TournamentsController < ApplicationController
   skip_before_action :authorized, only: [:index]
 
   def index
-    render json: {tournaments: Tournament.all}
-  end
-
-  def index
     tournaments = Tournament.all.map {|tourn| TournamentSerializer.new(tourn)}
     render json: {tournaments: tournaments}
   end
