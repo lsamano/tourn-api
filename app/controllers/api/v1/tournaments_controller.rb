@@ -18,6 +18,6 @@ class Api::V1::TournamentsController < ApplicationController
   private
 
   def tournament_params
-    params.require(:tournament).permit(:title, :description, :user_id)
+    params.require(:tournament).permit(:title, :description, :host_id)
   end
 end
