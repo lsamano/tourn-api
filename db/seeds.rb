@@ -11,10 +11,10 @@ Team.destroy_all
 Membership.destroy_all
 Entry.destroy_all
 
-user1 = User.create(username:"Emerald", password:"eme", bio:"A gem.")
-user2 = User.create(username:"Fire", password:"hoi", bio:"A strong player, good at everything except taking it easy.")
-user3 = User.create(username:"Alice", password:"a", bio:"I like hosting tournaments and supporting the community!")
-user4 = User.create(username:"vKoala", password:"violet", bio:"Am not actually a Koala")
+user1 = User.create(username:"Emerald", password:"eme", bio:"A gem.", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
+user2 = User.create(username:"Fire", password:"hoi", bio:"A strong player, good at everything except taking it easy.", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
+user3 = User.create(username:"Alice", password:"a", bio:"I like hosting tournaments and supporting the community!", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
+user4 = User.create(username:"vKoala", password:"violet", bio:"Am not actually a Koala", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
 
 tourn1 = Tournament.create(
   host: user1,

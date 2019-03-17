@@ -2,7 +2,8 @@ class Api::V1::TeamsController < ApplicationController
   skip_before_action :authorized
 
   def index
-    render json: {teams: Team.all}
+    teams = Team.all.map {|team| TeamSerializer.new(team)}
+    render json: {teams: teams}
   end
 
   def create
