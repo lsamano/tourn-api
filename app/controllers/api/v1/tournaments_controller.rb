@@ -2,7 +2,8 @@ class Api::V1::TournamentsController < ApplicationController
   skip_before_action :authorized, only: [:index]
 
   def index
-    tournaments = Tournament.all.map {|tourn| TournamentSerializer.new(tourn)}
+    tournaments = Tournament.all.sort_by { |tourn| tourn[:created_at] }.reverse
+    tournaments = tournaments.map {|tourn| TournamentSerializer.new(tourn)}
     render json: {tournaments: tournaments}
   end
 
@@ -13,6 +14,11 @@ class Api::V1::TournamentsController < ApplicationController
     else
       render json: { error: 'failed to create tournament' }, status: :not_acceptable
     end
+  end
+
+  def show
+    @tournament = Tournament.find(params[:id])
+    render json: @tournament
   end
 
   private

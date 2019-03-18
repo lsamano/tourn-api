@@ -35,6 +35,15 @@ tourn3 = Tournament.create(
   start_dt: "2019-03-20 [13:00:00]"
 )
 
+10.times do |tourn|
+  Tournament.create(
+    host: user3,
+    title: Faker::Esport.event,
+    description: Faker::Lorem.paragraph(2),
+    start_dt: Faker::Time.forward(60, :evening)
+  )
+end
+
 team1 = Team.create(name: "Zenith", captain: user1, tagline:"Peak Performance.")
 team2 = Team.create(name: "IkaRus", captain: user4, tagline:"Ika + Russia")
 

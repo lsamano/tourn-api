@@ -15,6 +15,11 @@ class Api::V1::TeamsController < ApplicationController
     end
   end
 
+  def show
+    @team = Team.find(params[:id])
+    render json: @team
+  end
+
   private
   def team_params
     params.require(:team).permit(:logo, :name, :tagline, :captain_id, :members)

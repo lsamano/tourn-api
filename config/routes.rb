@@ -5,9 +5,9 @@ Rails.application.routes.draw do
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
 
-      resources :tournaments, only: [:create, :index]
+      resources :tournaments, only: [:create, :index, :show]
 
-      resources :teams, only: [:create, :index]
+      resources :teams, only: [:create, :index, :show]
     end
   end
 end
