@@ -27,7 +27,8 @@ class Api::V1::TournamentsController < ApplicationController
     @tournament.assign_attributes(tournament_params)
     if @tournament.valid?
       @tournament.save
-      render json: @tournament
+      render json: { tournament: TournamentSerializer.new(@tournament), user: UserSerializer.new(current_user) }, status: :accepted
+
     else
       render json: { error: 'failed to update tournament' }, status: :not_acceptable
     end
