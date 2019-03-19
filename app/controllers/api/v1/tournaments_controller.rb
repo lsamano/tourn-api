@@ -10,6 +10,7 @@ class Api::V1::TournamentsController < ApplicationController
   def create
     @tournament = Tournament.create(tournament_params)
     if @tournament.valid?
+      Admin.create(user: current_user, tournament: @tournament)
       render json: { tournament: @tournament }, status: :created
     else
       render json: { error: 'failed to create tournament' }, status: :not_acceptable
