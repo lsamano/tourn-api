@@ -7,4 +7,6 @@ class Team < ApplicationRecord
   has_many :entries
   has_many :tournaments, through: :entries
 
+  has_many :team_requests
+  has_many :requesting_members, through: :team_requests, source: :user
 end
