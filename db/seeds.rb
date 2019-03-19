@@ -11,45 +11,104 @@ Team.destroy_all
 Membership.destroy_all
 Entry.destroy_all
 
+## Easter Egg Users
 user1 = User.create(username:"Emerald", password:"eme", bio:"A gem.", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
 user2 = User.create(username:"Fire", password:"hoi", bio:"A strong player, good at everything except taking it easy.", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
 user3 = User.create(username:"Alice", password:"a", bio:"I like hosting tournaments and supporting the community!", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
 user4 = User.create(username:"vKoala", password:"violet", bio:"Am not actually a Koala", avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2"))
 
+user5 = User.create(
+  username:"Woodey",
+  password:"woo",
+  bio: "Member of Zenith.",
+  avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2")
+)
+
+user6 = User.create(
+  username:"Ajae",
+  password:"aj",
+  bio: "Best Blaster in the West. Catch my streams on Friday nights at 9pm ET!",
+  avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2")
+)
+
+user7 = User.create(
+  username:"G-Ray",
+  password:"gray",
+  bio: "Artist and Ace of IkaRus.",
+  avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set4", "bg2")
+)
+
+## Easter Egg Tournaments
 tourn1 = Tournament.create(
   host: user1,
   title:"First Cup",
   description:"The first tournament in existence. The symbol of a budding community.",
-  start_dt: "2019-04-12 [15:00:00]"
+  start_dt: Faker::Time.forward(60, :evening)
 )
 tourn2 = Tournament.create(
   host: user1,
   title:"Second Cup",
   description:"The second tournament in existence. Not necessarily any better than the First.",
-  start_dt: "2019-04-19 [15:00:00]"
+  start_dt: Faker::Time.forward(60, :evening)
 )
 tourn3 = Tournament.create(
   host: user3,
   title:"House of Horrors",
   description:"The scariest tournament. Come play on the most broken map+mode combinations!",
-  start_dt: "2019-03-20 [13:00:00]"
+  start_dt: Faker::Time.forward(60, :evening)
 )
-
-10.times do |tourn|
-  Tournament.create(
-    host: user3,
-    title: Faker::Esport.event,
-    description: Faker::Lorem.paragraph(2),
-    start_dt: Faker::Time.forward(60, :evening)
-  )
-end
 
 team1 = Team.create(name: "Zenith", captain: user1, tagline:"Peak Performance.")
 team2 = Team.create(name: "IkaRus", captain: user4, tagline:"Ika + Russia")
+
+32.times do |x|
+  user = User.create(
+    username: Faker::Esport.player,
+    password:"aaa",
+    bio: Faker::Lorem.sentence,
+    avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
+  )
+  team = Team.create(
+    name: Faker::Esport.team,
+    captain_id: user.id,
+    tagline: Faker::Lorem.paragraph(2)
+  )
+  Membership.create(user: user, team: team)
+  Membership.create(user: User.all.sample, team: team)
+
+  3.times do |member|
+    newMember = User.create(
+      username:Faker::Esport.player,
+      password:"aaa",
+      bio: Faker::Lorem.sentence,
+      avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set1", "bg2")
+    )
+    Membership.create(user: newMember, team: team)
+  end
+end
+
+## Regular Tournaments
+10.times do |tourn|
+  tourn = Tournament.create(
+    host: user3,
+    title: Faker::Ancient.hero + " Tournament",
+    description: Faker::Lorem.paragraph(2),
+    start_dt: Faker::Time.forward(60, :evening)
+  )
+  entrants = Team.all.sample(8)
+
+  entrants.each do |team|
+    Entry.create(team: team, tournament: tourn)
+  end
+end
 
 mem1 = Membership.create(user: user2, team: team1)
 mem2 = Membership.create(user: user1, team: team1)
 mem3 = Membership.create(user: user4, team: team2)
 mem4 = Membership.create(user: user4, team: team1)
+mem5 = Membership.create(user: user5, team: team1)
+mem6 = Membership.create(user: user6, team: team1)
+
+
 
 entry1 = Entry.create(team: team1, tournament: tourn3)

@@ -9,6 +9,7 @@ class Api::V1::TeamsController < ApplicationController
   def create
     @team = Team.create(team_params)
     if @team.valid?
+      Membership.create(user: current_user, team: @team)
       render json: { team: @team }, status: :created
     else
       render json: { error: 'Failed to create Team' }, status: :not_acceptable
