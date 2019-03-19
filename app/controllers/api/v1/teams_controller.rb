@@ -21,6 +21,17 @@ class Api::V1::TeamsController < ApplicationController
     render json: @team
   end
 
+  def update
+    @team = Team.find(params[:id])
+    @team.assign_attributes(team_params)
+    if @team.valid?
+      @team.save
+      render json: @team
+    else
+      render json: { error: 'failed to update team' }, status: :not_acceptable
+    end
+  end
+
   private
   def team_params
     params.require(:team).permit(:logo, :name, :tagline, :captain_id, :members)

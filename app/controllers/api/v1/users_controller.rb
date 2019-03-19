@@ -26,6 +26,17 @@ class Api::V1::UsersController < ApplicationController
     render json: @user
   end
 
+  def update
+    @user = User.find(params[:id])
+    @user.assign_attributes(user_params)
+    if @user.valid?
+      @user.save
+      render json: @user
+    else
+      render json: { error: 'failed to update user' }, status: :not_acceptable
+    end
+  end
+
   private
 
   def user_params

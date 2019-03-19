@@ -22,6 +22,17 @@ class Api::V1::TournamentsController < ApplicationController
     render json: @tournament
   end
 
+  def update
+    @tournament = Tournament.find(params[:id])
+    @tournament.assign_attributes(tournament_params)
+    if @tournament.valid?
+      @tournament.save
+      render json: @tournament
+    else
+      render json: { error: 'failed to update tournament' }, status: :not_acceptable
+    end
+  end
+
   private
 
   def tournament_params
