@@ -6,7 +6,8 @@ class Api::V1::MembershipsController < ApplicationController
   def create
     @membership = Membership.create(membership_params)
     if @membership.valid?
-      render json: { membership: @membership }, status: :created
+      team = Team.find(@membership.team_id)
+      render json: { team: TeamSerializer.new(team), user: UserSerializer.new(current_user) }, status: :accepted
     else
       render json: { error: 'Failed to create Membership' }, status: :not_acceptable
     end
