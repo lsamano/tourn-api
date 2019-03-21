@@ -10,6 +10,11 @@ class Api::V1::TournamentsController < ApplicationController
   def create
     @tournament = Tournament.create(tournament_params)
     if @tournament.valid?
+      # Create bracket
+        
+
+
+
       Admin.create(user: current_user, tournament: @tournament)
       render json: { tournament: @tournament, user: UserSerializer.new(current_user) }, status: :created
     else
