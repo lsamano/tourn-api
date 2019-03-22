@@ -6,4 +6,6 @@ class TournamentSerializer < ActiveModel::Serializer
   has_many :teams, through: :entries
 
   has_many :admin_users
+
+  has_one :bracket
 end

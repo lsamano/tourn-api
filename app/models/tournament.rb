@@ -10,5 +10,5 @@ class Tournament < ApplicationRecord
   has_many :teams, through: :entries
   has_many :members, through: :teams
 
-  has_many :rounds
+  has_one :bracket
 end

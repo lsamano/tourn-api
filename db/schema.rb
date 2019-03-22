@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_013439) do
+ActiveRecord::Schema.define(version: 2019_03_21_173329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "tournament_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "brackets", force: :cascade do |t|
     t.integer "tournament_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_013439) do
     t.integer "number"
     t.string "notes"
     t.integer "best_of"
-    t.integer "tournament_id"
+    t.integer "bracket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
