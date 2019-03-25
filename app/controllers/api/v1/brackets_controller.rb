@@ -10,7 +10,7 @@ class Api::V1::BracketsController < ApplicationController
     @bracket = Bracket.create("tournament_id": params["tournament"]["id"])
     @bracket.make_bracket(params["teams"])
     if @bracket.valid?
-      render json: { bracket: BracketSerializer.new(@bracket) }, status: :created
+      render json: @bracket.tournament, status: :created
     else
       render json: { error: 'failed to create bracket' }, status: :not_acceptable
     end
