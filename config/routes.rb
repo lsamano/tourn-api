@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       resources :entries, only: [:create, :destroy, :update]
       resources :memberships, only: [:create, :destroy]
       resources :admins, only: [:create, :destroy]
+      resources :brackets, only: [:create, :index]
+      resources :nodes, only: [:index]
     end
   end
 end
