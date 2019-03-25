@@ -7,7 +7,7 @@ class Bracket < ApplicationRecord
 
   rounds = Math.log(2, entrants.length).ceil
   root_node = Node.create
-  self.node_id = root_node.id
+  self.update(node_id: root_node.id)
   array = [root_node]
   def create_child_nodes(array, entrants)
     new_array = array.each_with_object([]) do |given_node, new_array|
@@ -20,7 +20,8 @@ class Bracket < ApplicationRecord
     if new_array.length >= entrants.length
       # .each over them to fill them with the entrants
       new_array.each do |node|
-        node.update(team_id: entrants.shift())
+        node.update(name: entrants[0]["name"])
+        node.update(team_id: entrants.shift()["id"])
       end
     else
       create_child_nodes(new_array, entrants)
