@@ -43,45 +43,49 @@ tourn1 = Tournament.create(
   host: user1,
   title:"First Cup",
   description:"The first tournament in existence. The symbol of a budding community.",
-  start_dt: Faker::Time.forward(60, :evening)
+  start_dt: Faker::Time.forward(60, :evening),
+  image: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
 )
 tourn2 = Tournament.create(
   host: user1,
   title:"Second Cup",
   description:"The second tournament in existence. Not necessarily any better than the First.",
-  start_dt: Faker::Time.forward(60, :evening)
+  start_dt: Faker::Time.forward(60, :evening),
+  image: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
 )
 tourn3 = Tournament.create(
   host: user3,
   title:"House of Horrors",
   description:"The scariest tournament. Come play on the most broken map+mode combinations!",
-  start_dt: Faker::Time.forward(60, :evening)
+  start_dt: Faker::Time.forward(60, :evening),
+  image: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
 )
 
-team1 = Team.create(name: "Zenith", captain: user1, tagline:"Peak Performance.")
-team2 = Team.create(name: "IkaRus", captain: user4, tagline:"Ika + Russia")
+team1 = Team.create(name: "Zenith", captain: user1, tagline:"Peak Performance.", logo: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set1", "bg2"))
+team2 = Team.create(name: "IkaRus", captain: user4, tagline:"Ika + Russia", logo: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set1", "bg2"))
 
 32.times do |x|
   user = User.create(
-    username: Faker::Esport.player,
+    username: Faker::Lorem.word.capitalize,
     password:"aaa",
     bio: Faker::Lorem.sentence,
     avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
   )
   team = Team.create(
-    name: Faker::Esport.team,
+    name: Faker::Lorem.word.capitalize,
     captain_id: user.id,
-    tagline: Faker::Lorem.paragraph(2)
+    tagline: Faker::Lorem.paragraph(2),
+    logo: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set1", "bg2")
   )
   Membership.create(user: user, team: team)
   Membership.create(user: User.all.sample, team: team)
 
   3.times do |member|
     newMember = User.create(
-      username:Faker::Esport.player,
+      username:Faker::Lorem.word.capitalize,
       password:"aaa",
       bio: Faker::Lorem.sentence,
-      avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set1", "bg2")
+      avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
     )
     Membership.create(user: newMember, team: team)
   end
@@ -93,8 +97,9 @@ end
     host: user3,
     title: Faker::Ancient.hero + " Tournament",
     description: Faker::Lorem.paragraph(2),
-    start_dt: Faker::Time.forward(60, :evening)
-  )
+    start_dt: Faker::Time.forward(60, :evening),
+    image: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set3", "bg2")
+    )
   entrants = Team.all.sample(8)
 
   entrants.each do |team|
