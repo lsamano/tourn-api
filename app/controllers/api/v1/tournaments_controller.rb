@@ -35,6 +35,13 @@ class Api::V1::TournamentsController < ApplicationController
     end
   end
 
+  def destroy
+    Tournament.find(params[:id]).destroy
+    tournaments = Tournament.all.sort_by { |tourn| tourn[:created_at] }.reverse
+    tournaments = tournaments.map {|tourn| TournamentSerializer.new(tourn)}
+    render json: {user: UserSerializer.new(current_user), tournaments: tournaments}
+  end
+
   private
 
   def tournament_params

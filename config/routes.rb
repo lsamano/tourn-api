@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get '/profile', to: 'users#profile'
 
       resources :users, only: [:create, :index, :show, :update]
-      resources :tournaments, only: [:create, :index, :show, :update]
+      resources :tournaments, only: [:create, :index, :show, :update, :destroy]
       resources :teams, only: [:create, :index, :show, :update]
       resources :entries, only: [:create, :destroy, :update]
       resources :memberships, only: [:create, :destroy]
