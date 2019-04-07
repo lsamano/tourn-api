@@ -10,7 +10,7 @@ class Api::V1::TournamentsController < ApplicationController
   def create
     @tournament = Tournament.create(tournament_params)
     if @tournament.valid?
-      ## Add Host to Admins List
+      # Add Host to Admins List
       Admin.create(user: current_user, tournament: @tournament)
       # Return Tournament and User/Host
       render json: { tournament: TournamentSerializer.new(@tournament), user: UserSerializer.new(current_user) }, status: :created
