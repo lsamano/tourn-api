@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       resources :tournaments, only: [:create, :index, :show, :update, :destroy]
       resources :teams, only: [:create, :index, :show, :update]
       resources :entries, only: [:create, :destroy, :update]
-      resources :memberships, only: [:create, :destroy]
+      resources :memberships, only: [:create]
+      delete '/memberships/:team_id', to: 'memberships#delete_by_team'
       resources :admins, only: [:create, :destroy]
       resources :brackets, only: [:create, :index]
       resources :nodes, only: [:index]
