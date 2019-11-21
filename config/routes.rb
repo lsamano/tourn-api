@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :admins, only: [:create, :destroy]
       resources :brackets, only: [:create, :index]
       resources :nodes, only: [:index]
+      resources :team_requests, only: [:create]
     end
   end
 end
