@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :teams, through: :memberships
   has_many :captained_teams, class_name: "Team", foreign_key: :captain_id
 
-  has_many :team_requests
-  has_many :requested_teams, through: :team_requests, source: :team
+  has_many :join_requests
+  has_many :requested_teams, through: :join_requests, source: :team
 
   validates :username, uniqueness: { case_sensitive: false }
 end
