@@ -6,4 +6,11 @@ class JoinRequest < ApplicationRecord
   validates_uniqueness_of :team_id, scope: :user_id
 
   # Need validation for verifying that you're not already on the team
+  validate :you_cannot_request_to_join_your_own_team
+
+  def you_cannot_request_to_join_your_own_team
+    if # user.teams.includes team.id == team_id
+      errors.add(:team_id, "can't be an ID of a team you currently belong to")
+    end
+  end
 end
