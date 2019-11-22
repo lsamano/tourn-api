@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_214403) do
+ActiveRecord::Schema.define(version: 2019_11_22_150551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2019_03_26_214403) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "join_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_join_requests_on_team_id"
+    t.index ["user_id"], name: "index_join_requests_on_user_id"
+  end
+
   create_table "matches", force: :cascade do |t|
     t.string "notes"
     t.integer "winner_id"
@@ -79,13 +89,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_214403) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "team_requests", force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "teams", force: :cascade do |t|
     t.string "logo"
     t.string "name"
@@ -114,4 +117,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_214403) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "join_requests", "teams"
+  add_foreign_key "join_requests", "users"
 end
