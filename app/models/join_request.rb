@@ -9,7 +9,7 @@ class JoinRequest < ApplicationRecord
   validate :you_cannot_request_to_join_your_own_team
 
   def you_cannot_request_to_join_your_own_team
-    if user.teams.any? { |team| team.id == team_id }
+    if self.user.teams.any? { |team| team.id == team_id }
       errors.add(:team_id, "can't be an ID of a team you currently belong to")
     end
   end

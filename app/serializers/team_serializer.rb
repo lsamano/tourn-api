@@ -3,4 +3,5 @@ class TeamSerializer < ActiveModel::Serializer
   belongs_to :captain, serializer: TeamUserSerializer
   has_many :tournaments, serializer: TeamTournamentSerializer
   has_many :members, serializer: TeamUserSerializer
+  has_many :join_requests
 end
