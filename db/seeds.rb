@@ -77,8 +77,8 @@ team2 = Team.create(name: "IkaRus", captain: user4, tagline:"Ika + Russia", logo
     tagline: Faker::Lorem.paragraph(2),
     logo: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set1", "bg2")
   )
-  Membership.create(user: user, team: team)
-  Membership.create(user: User.all.sample, team: team)
+  Membership.create(user: user, team: team, admin: true)
+  Membership.create(user: User.all.sample, team: team, admin: false)
 
   3.times do |member|
     newMember = User.create(
@@ -87,7 +87,7 @@ team2 = Team.create(name: "IkaRus", captain: user4, tagline:"Ika + Russia", logo
       bio: Faker::Lorem.sentence,
       avatar: Faker::Avatar.image(Faker::Lorem.characters(15), "300x300", "jpg", "set2", "bg2")
     )
-    Membership.create(user: newMember, team: team)
+    Membership.create(user: newMember, team: team, admin: false)
   end
 end
 
@@ -107,12 +107,12 @@ end
   end
 end
 
-mem1 = Membership.create(user: user2, team: team1)
-mem2 = Membership.create(user: user1, team: team1)
-mem3 = Membership.create(user: user4, team: team2)
-mem4 = Membership.create(user: user4, team: team1)
-mem5 = Membership.create(user: user5, team: team1)
-mem6 = Membership.create(user: user6, team: team1)
+mem1 = Membership.create(user: user2, team: team1, admin: false)
+mem2 = Membership.create(user: user1, team: team1, admin: false)
+mem3 = Membership.create(user: user4, team: team2, admin: false)
+mem4 = Membership.create(user: user4, team: team1, admin: false)
+mem5 = Membership.create(user: user5, team: team1, admin: false)
+mem6 = Membership.create(user: user6, team: team1, admin: false)
 
 
 
