@@ -61,19 +61,22 @@ class Bracket < ApplicationRecord
 
         shuffled_entrants = entrants.shuffle
 
-        if remaining_num_of_matches_to_create <= new_array.length / 2
-          new_array.each_with_index do |node, index|
-            if index % 2 == 0
-              entrant = shuffled_entrants.shift()
-              node.update(name: entrant["name"])
-              node.update(team_id: entrant["id"])
-            end
-            break if shuffled_entrants.length == 0
-          end
-        else
-          # need logic for handling more than half the extra matches
-          # some matches/groups will be complete
-        end
+        ## Place pointer at beginning and end indices
+
+
+        # if remaining_num_of_matches_to_create <= new_array.length / 2
+        #   new_array.each_with_index do |node, index|
+        #     if index % 2 == 0 # if even number
+        #       entrant = shuffled_entrants.shift()
+        #       node.update(name: entrant["name"])
+        #       node.update(team_id: entrant["id"])
+        #     end
+        #     break if shuffled_entrants.length == 0
+        #   end
+        # else
+        #   # need logic for handling more than half the extra matches
+        #   # some matches/groups will be complete
+        # end
 
       elsif new_array.length == entrants.length
         ## If the current round has exactly enough nodes,
