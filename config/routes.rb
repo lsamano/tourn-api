@@ -20,7 +20,8 @@ Rails.application.routes.draw do
       resources :memberships, only: [:create]
       delete '/memberships/:team_id', to: 'memberships#delete_by_team'
 
-      resources :join_requests, only: [:create]
+      resources :join_requests, only: [:index, :create]
+      post '/join_requests/:id', to: 'join_requests#approve_join_request'
 
       # Bracket Routes
       resources :admins, only: [:create, :destroy]
