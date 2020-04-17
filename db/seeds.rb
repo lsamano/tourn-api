@@ -109,7 +109,7 @@ puts "Now seeding 10 regular tournaments with 8 entries each..."
     title: "#{hero_name} Tournament",
     description: Faker::Lorem.paragraph(2),
     start_dt: Faker::Time.forward(60, :evening),
-    image: "https://avatars.dicebear.com/v2/bottts/#{hero_name}.svg"
+    image: "https://avatars.dicebear.com/v2/jdenticon/#{hero_name}.svg"
     )
   entrants = Team.all.sample(8)
 
