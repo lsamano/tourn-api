@@ -71,6 +71,7 @@ puts "Easter eggs teams seeded."
 ## Users and Teams
 puts "Now seeding 32 users and teams..."
 32.times do |x|
+  puts "Team #{x + 1}..."
   username = Faker::Lorem.word.capitalize
   user = User.create(
     username: username,
